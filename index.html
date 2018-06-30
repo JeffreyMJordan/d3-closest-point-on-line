@@ -1,0 +1,16 @@
+<head>
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      let svg = d3.select("#svg");
+      let points = [[474,276],[486,393],[378,388],[338,323],[341,138],[450,252],[320,148],[346,227],[365,108],[162,62]];
+      let line = d3.line().curve(d3.curveCardinal);
+      let path = svg.append("path").datum(points).attr("d", line).attr("fill", "none").attr("stroke-width", 3).attr("stroke", "black");
+
+    })  
+  </script>
+</head>
+
+<body>
+  <svg id="svg" width="500px" height="500px"></svg>
+</body>
