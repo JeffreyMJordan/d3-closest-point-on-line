@@ -4,10 +4,50 @@
     window.addEventListener("DOMContentLoaded", () => {
       let svg = d3.select("#svg");
       let points = [[474,276],[486,393],[378,388],[338,323],[341,138],[450,252],[320,148],[346,227],[365,108],[162,62]];
-      let line = d3.line().curve(d3.curveCardinal);
-      let path = svg.append("path").datum(points).attr("d", line).attr("fill", "none").attr("stroke-width", 3).attr("stroke", "black");
+      let line = d3.line().curve(d3.curveLinear);
+      let path = svg.append("path")
+        .datum(points)
+        .attr("d", line)
+        .attr("fill", "none")
+        .attr("stroke-width", 3)
+        .attr("stroke", "black");
 
-    })  
+      svg.append("rect")
+        .attr("width", "500px")
+        .attr("height", "500px")
+        .attr("fill", "none")
+        .style("pointer-events", "all")
+        .on("mousemove", mousemove);
+
+    function mousemove(){
+      let mouseThis = d3.mouse(this);
+      let mousePoint = {x: mouseThis[0]*1.0, y: mouseThis[1]*1.0};
+      let pathNode = path.node();
+      let idx = 0;
+      let oldPoint = {};
+      let newPoint = pathNode.getPointAtLength(idx);
+      let best = Infinity;
+      let bestPoint;
+      while(!(oldPoint.x === newPoint.x && oldPoint.y === newPoint.y)){
+        let distance = getDistance(newPoint, mousePoint);
+        
+        if(distance<best){
+          best = distance * 1.0;
+          bestPoint = newPoint;
+        }
+        
+        oldPoint = newPoint;
+        idx += 1;
+        newPoint = pathNode.getPointAtLength(idx);
+      }
+      
+      console.log(best);
+    }
+
+    function getDistance(p1, p2){
+      return Math.sqrt(Math.pow((p1.x - p2.x), 2) + Math.pow((p1.y - p2.y), 2))
+    }
+  })  
   </script>
 </head>
 
