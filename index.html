@@ -18,6 +18,8 @@
         .attr("fill", "none")
         .style("pointer-events", "all")
         .on("mousemove", mousemove);
+      
+      let mouseLine = svg.append("line").style("stroke", "black").style("stroke-width", "1");
 
     function mousemove(){
       let mouseThis = d3.mouse(this);
@@ -41,7 +43,10 @@
         newPoint = pathNode.getPointAtLength(idx);
       }
       
-      console.log(best);
+      mouseLine.attr("x1", mousePoint.x)
+        .attr("x2", bestPoint.x)
+        .attr("y1", mousePoint.y)
+        .attr("y2", bestPoint.y)
     }
 
     function getDistance(p1, p2){
