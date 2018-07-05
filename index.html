@@ -3,7 +3,7 @@
   <script>
     window.addEventListener("DOMContentLoaded", () => {
       let svg = d3.select("#svg");
-      let points = [[474,276],[486,393],[378,388],[338,323],[341,138],[450,252],[320,148],[346,227],[365,108],[162,62], [762,300]];
+      let points = [[474,276],[486,393],[378,388],[338,323],[341,138],[450,252],[320,148],[346,227],[365,108],[162,62], [762,300], [660,400]];
       let line = d3.line().curve(d3.curveLinear);
       let path = svg.append("path")
         .datum(points)
@@ -19,8 +19,8 @@
         .style("pointer-events", "all")
         .on("mousemove", mousemove);
       
-      let mouseLine = svg.append("line").style("stroke", "black").style("stroke-width", "3");
-      let circle = svg.append("circle").style("stroke", "black").style("stroke-width", "1").style("fill", "black").attr("r", "5");
+      let mouseLine = svg.append("line").style("stroke", "red").style("stroke-width", "2");
+      let circle = svg.append("circle").style("stroke", "red").style("stroke-width", "1").style("fill", "black").attr("r", "5");
 
     function mousemove(){
       let mouseThis = d3.mouse(this);
